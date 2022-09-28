@@ -82,15 +82,11 @@ def webhook():
 
     return res
 
-
 def main():
 
     req = request.get_json(force=True)
     #print(json.dumps(req, indent=4))
     event_id = req.get('sessionInfo').get('parameters').get('event_id')
-    print("EVENT ID")
-    print(type(event_id))
-    print(event_id)
 
     creds = authentication()
     service = build("calendar", "v3", credentials=creds)
@@ -98,7 +94,6 @@ def main():
     #service.events().delete(calendarId='primary', eventId='eventId').execute()
  
     event_result = service.events().delete(calendarId='61u5i3fkss34a4t50vr1j5l7e4@group.calendar.google.com', eventId=event_id).execute()
-    #event_result = service.events().delete(calendarId='61u5i3fkss34a4t50vr1j5l7e4@group.calendar.google.com', eventId=event_id).execute()
 
     text = "id: " + event_id + " event deleted"
   
