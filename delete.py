@@ -98,12 +98,14 @@ def main():
     #service.events().delete(calendarId='primary', eventId='eventId').execute()
     #service.events().delete(calendarId='primary', eventId='eventId').execute()
     event_result = service.events().delete(calendarId='61u5i3fkss34a4t50vr1j5l7e4@group.calendar.google.com', eventId=event_id).execute()
+    print("event_result")
     print(event_result)
     print(json.dumps(event_result, indent=4))
+
     text = "id: " + event_id + "event deleted"
     text_param = {}
     text_param['text'] = text
-    text_param['event_id'] = event_result['id']
+    #text_param['event_id'] = event_result['id']
   
     #return text
     return text_param
