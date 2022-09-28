@@ -57,12 +57,32 @@ def authentication():
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
-    #text = "webhook flask text response"
-    text = main()
+
+    #text = main()
+    text_param =  main()
+    text = text_param['text']
+    event_id = text_param['event_id']
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
+        "fulfillment_response": {
+            "messages": [
+                {
+                    "text": {
+                        "text": [
+                            text
+                        ]
+                    }
+                }
+            ]
+        },
+        "session_info": {
+            "session" : "session_name",
+            "parameters": {
+                "event_id" : event_id
+            }
+        }
     }
+
     return res
 
 
@@ -70,13 +90,17 @@ def main():
 
     req = request.get_json(force=True)
     print(json.dumps(req, indent=4))
+    event_id = req.get('sessionInfo').get('parameters').get('event_id')
+    print("EVENT ID")
+    print(event_id)
 
     creds = authentication()
     service = build("calendar", "v3", credentials=creds)
 
-    service.events().delete(calendarId='primary', eventId='eventId').execute()
+    #service.events().delete(calendarId='primary', eventId='eventId').execute()
+    service.events().delete(calendarId='primary', eventId=event_id).execute()
 
-    text = "id: " + event_result['id'] + "event deleted"
+    text = "id: " + event_id + "event deleted"
     return text
 
     app.run()
