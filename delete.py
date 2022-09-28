@@ -101,6 +101,11 @@ def main():
     service.events().delete(calendarId='primary', eventId=event_id).execute()
 
     text = "id: " + event_id + "event deleted"
-    return text
+    text_param = {}
+    text_param['text'] = text
+    text_param['event_id'] = event_result['id']
+  
+    #return text
+    return text_param
 
     app.run()
