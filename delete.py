@@ -90,15 +90,16 @@ def main():
 
     req = request.get_json(force=True)
     print(json.dumps(req, indent=4))
-    event_id = req.get('sessionInfo').get('parameters').get('event_id')
+    #event_id = req.get('sessionInfo').get('parameters').get('event_id')
+    event_id = "AAA"
     print("EVENT ID")
     print(event_id)
 
     creds = authentication()
     service = build("calendar", "v3", credentials=creds)
 
-    #service.events().delete(calendarId='primary', eventId='eventId').execute()
-    service.events().delete(calendarId='primary', eventId=event_id).execute()
+    service.events().delete(calendarId='primary', eventId='eventId').execute()
+    #service.events().delete(calendarId='primary', eventId=event_id).execute()
 
     text = "id: " + event_id + "event deleted"
     text_param = {}
