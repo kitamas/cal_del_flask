@@ -58,9 +58,9 @@ def authentication():
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
 
-    text = main()
-    #text_param =  main()
-    #text = text_param['text']
+    #text = main()
+    text_param =  main()
+    text = text_param['text']
     #event_id = text_param['event_id']
 
     res = {
@@ -101,12 +101,12 @@ def main():
     service.events().delete(calendarId='primary', eventId='eventId').execute()
     #service.events().delete(calendarId='primary', eventId=event_id).execute()
 
-    text = "id: " + event_id + "event deleted"
-    #text_param = {}
-    #text_param['text'] = text
+    #text = "id: " + event_id + "event deleted"
+    text_param = {}
+    text_param['text'] = text
     #text_param['event_id'] = event_result['id']
   
-    return text
-    #return text_param
+    #return text
+    return text_param
 
     app.run()
