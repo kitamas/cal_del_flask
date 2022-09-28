@@ -96,7 +96,8 @@ def main():
     service = build("calendar", "v3", credentials=creds)
 
     #service.events().delete(calendarId='primary', eventId='eventId').execute()
-    service.events().delete(calendarId='primary', eventId=event_id).execute()
+    #service.events().delete(calendarId='primary', eventId='eventId').execute()
+    service.events().delete(calendarId='61u5i3fkss34a4t50vr1j5l7e4@group.calendar.google.com', eventId=event_id).execute()
 
     text = "id: " + event_id + "event deleted"
     text_param = {}
