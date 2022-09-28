@@ -99,21 +99,15 @@ def main():
     #service.events().delete(calendarId='primary', eventId='eventId').execute()
     event_result = service.events().delete(calendarId='61u5i3fkss34a4t50vr1j5l7e4@group.calendar.google.com', eventId=event_id).execute()
 
-    result = type(event_result)
-    print("result = = = =")
-    print(result)
-
     text = "id: " + event_id + "event deleted"
     text_param = {}
     text_param['text'] = text
-    #text_param['event_id'] = event_result['id']
-    text_param['event_id'] = event_result[0]
+    text_param['event_id'] = event_result
   
     #return text
 
     print("EVENT RESULT text_param")
     print(text_param)
-
 
     return text_param
 
